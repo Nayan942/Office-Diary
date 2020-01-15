@@ -1,0 +1,27 @@
+<% include partials/header%>
+
+<div class="container">
+
+    <div class="row"> 
+        <div style="text-align:center;width:30%;margin:25px auto;">
+            <h3> Your data will be deleted permanently. Are you sure?</h3>
+        </div>
+        <div style="width:30%;margin:25px auto;">
+            <form class="delete-form" action="/users/<%=user._id%>?_method=DELETE"          
+            method="POST">
+                <div class="form-group">
+                    <input class="form-control" placeholder="Enter Password" type=password name="password" >
+                </div>
+                <button class="btn btn-danger">Delete</button>
+            </form>
+
+            <form class="delete-form" action="/users"          
+            method="GET">
+                <button class="btn btn-success">Cancel</button>
+            </form>                
+
+        </div>
+    </div>
+</div>
+
+<% include partials/footer%>

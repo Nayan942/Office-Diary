@@ -1,0 +1,56 @@
+
+body{background: rgb(255,255,255);
+background: linear-gradient(90deg, rgba(255,255,255,0.7934524151457458) 7%, rgba(194,234,249,1) 100%);
+}
+
+body{
+    background-color:rgba(194,234,249,1);
+}
+
+.jumbotron{  /* fallback for old browsers */
+background: rgb(255,255,255);
+background: linear-gradient(90deg, rgba(255,255,255,0.7934524151457458) 7%, rgba(194,234,249,1) 100%);
+}
+
+
+.thumbnail{background: rgb(255,255,255);
+background: linear-gradient(90deg, rgba(255,255,255,0.7934524151457458) 7%, rgba(194,234,249,1) 100%);
+
+}
+
+body{
+    background: rgba(194,234,249,1);
+}
+
+
+.thumbnail img{
+    width:100%;
+    border:none;
+}
+
+.thumbnail{
+    padding: 0;
+}
+
+a{
+    outline:none;
+    border:none !important;
+}
+
+
+.caption-full{
+    margin:9px;
+}
+
+
+.delete-form{
+    display: inline;
+}
+
+.done{
+	text-decoration: line-through;
+}
+
+div, button, p, h1, h2, h3, h4, h5, a {
+    text-transform:capitalize;
+}

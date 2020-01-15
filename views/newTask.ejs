@@ -1,0 +1,24 @@
+<% include partials/header%>
+
+<div class="container">
+
+    <div class="row"> 
+        <div style="text-align:center;width:30%;margin:25px auto;">
+            <h1> Assign a New Task to <%=user.name%> </h1>
+        </div>
+        
+        <div style="width:30%;margin:25px auto;">
+            <form action="/users/<%=user._id%>/task" method="POST">
+                <div class="form-group">
+                    <input class="form-control" type=text placeholder="text" name="task[text]">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block">Submit!</button>
+                </div>
+            </form>
+            <a href="/users">Go Back</a>
+        </div>
+    </div>
+</div>
+
+<% include partials/footer%>

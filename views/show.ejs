@@ -1,0 +1,68 @@
+<% include partials/header%>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="thumbnail">
+                    <div class="caption-full">
+                        <h2 style="text-transform:capitalize;"><%=user.name%></h2>
+                        <a class="btn btn-xs btn-warning" href="/users/<%=user._id%>/edit">Edit User</a>
+
+                        <a class="btn btn-xs btn-danger"
+                        href="/users/<%=user._id%>/delete">Delete User
+                        </a> 
+                        
+                    </div>
+                </div>
+                <div class="well">
+                    <div>
+                        <a class="btn btn-success" href="/users/<%=user._id%>/task/new">New Task</a>                     
+                    </div>
+                    <hr>
+
+
+
+
+
+                    <% user.tasks.forEach(function(task){%>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <% if(task.done==="true"){ %>
+                                    <p class="done"><%=task.text%></p>
+                                <% } else { %>
+                                    <p><%=task.text%></p>
+                                <% } %>
+                                <div>
+                                    <span><%=task.created.toDateString()%></span>
+                                </div>
+                                <% if(task.name){ %>
+                                    <div>
+                                        <span>By : <%=task.name%></span>
+                                    </div>
+                                <% } %><p></p>
+                                <form class="delete-form" 
+                                    action="/users/<%=user._id%>/task/<%=task._id%>/edit" method="GET">
+                                    <button class="btn btn-xs btn-warning">Edit
+                                    </button>
+                                </form>
+                                <form class="delete-form" 
+                                    action="/users/<%=user._id%>/task/<%=task._id%>?_method=DELETE" method="POST">
+                                    <button class="btn btn-xs btn-danger">Delete
+                                    </button>
+                                </form>
+                                <form class="delete-form" 
+                                    action="/users/<%=user._id%>/<%=task._id%>/done" method="GET">
+                                    <button class="btn btn-xs btn-success">Done
+                                    </button>
+                                </form>
+                                
+                                <hr>
+                            </div>
+                        </div>
+                    <%})%>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<% include partials/footer%>

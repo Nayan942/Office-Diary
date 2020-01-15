@@ -1,0 +1,31 @@
+<% include partials/header %>
+
+    <div style="text-align:center;width:30%;margin:25px auto;">
+        <h1>Forward This Task to :</h1>
+    </div>
+    
+<% user.forEach(function(user){ %>
+    <div style="width:30%;margin:25px auto;">
+            <form action="/users/<%=user_id%>/<%=user._id%>/<%=task_id%>" method="POST">
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block"><%=user.name%></button>
+                </div>
+            </form>
+    </div>   
+<% }) %>
+
+    <div style="width:30%;margin:25px auto;">
+            <form action="/users/<%=user_id%>/<%=task_id%>/skip" method="GET">
+                <div class="form-group">
+                    <button class="btn btn-info btn-block">Skip</button>
+                </div>
+            </form>
+    </div>  
+<div style="width:30%;margin:25px auto;">
+    <div class="form-group">
+        <a href="/users">Go Back</a>
+    </div>
+</div> 
+
+
+<% include partials/footer %>

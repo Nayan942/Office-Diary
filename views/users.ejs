@@ -1,0 +1,35 @@
+<%include partials/header%>
+    <div class="container">
+            <header class="jumbotron">
+                <div class="container">
+                    <h1><i class="calendar alternate icon"></i>Welcome To Office Diary!</h1>
+                    <p>
+                        <a class="btn btn-primary btn-lg" href="/users/new">Add New User</a>
+                    </p>
+                </div>
+            </header>
+            
+            
+            <div class="row text-center"  style="display:flex; flex-wrap:wrap">  
+            
+                    <!--badha aada avara na thai jay aetle -->
+
+            <% allUser.forEach(user=>{%>
+                <div class="col-md-3 col-sm-6">
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <h4 style="text-transform:capitalize"><%=user.name.substring(0,20)%></h4>
+                        </div>
+                        <p>
+                            <a class="btn btn-primary" href="/users/<%=user._id%>">All Tasks</a>
+                        </p>
+                        <p></p>
+                    </div>
+                </div>    
+                
+            <%})%>
+            
+                    
+            </div>
+    </div>
+<%include partials/footer%>

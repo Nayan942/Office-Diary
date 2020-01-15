@@ -1,0 +1,31 @@
+<% include partials/header%>
+
+<div class="container">
+
+    <div class="row"> 
+        <div style="text-align:center;width:30%;margin:25px auto;">
+            <h1>Create a New User</h1>
+        </div>
+        
+        <div style="width:30%;margin:25px auto;">
+            <form action="/users" method="POST">
+                
+                <div class="form-group">
+                    <input class="form-control" required type=text placeholder="name of user" name="user[name]">
+                </div>
+
+                <div class="form-group">
+                    <input class="form-control" required type=email placeholder="email adress of user" name="user[email]">
+                </div>
+                
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block">Submit</button>
+                
+                </div>
+            </form>
+            <a href="/users">Go Back</a>
+        </div>
+    </div>
+</div>
+
+<% include partials/footer%>
