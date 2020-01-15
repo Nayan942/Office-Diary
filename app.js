@@ -82,6 +82,8 @@ app.get("/users",function(req,res){
 	User.find({}, function(err,allUser){
 		if(err){
 			console.log(err);
+			req.flash("error","Something went wrong!! Please try again!!");
+			res.redirect("/users");
 		}
 		else {
 			res.render("users.ejs",{allUser:allUser})
@@ -94,6 +96,8 @@ app.post("/users",function(req,res){
 	User.findOne({name:req.body.user.name},function(err,copyUser){
 		if(err){
 			console.log(err);
+			req.flash("error","Something went wrong!! Please try again!!");
+			res.redirect("/users");
 		} 
 		if(copyUser){
 			req.flash("error","Username already exists!!!");
@@ -102,6 +106,8 @@ app.post("/users",function(req,res){
 			User.create(req.body.user, function(err, newCreated){
 				if(err){
 					console.log(err);
+					req.flash("error","Something went wrong!! Please try again!!");
+					res.redirect("/users");
 				}
 				else {
 					const mailOptions = {
@@ -111,8 +117,11 @@ app.post("/users",function(req,res){
 						html: '<h2>HEY ' + newCreated.name + '!!! You have succesfully registerd on office diary!</h2>'
 					};
 					transporter.sendMail(mailOptions, function (err, info) {
-					   if(err)
-					     console.log(err)
+					   if(err){
+					     console.log(err);
+						 req.flash("error","Something went wrong!! Please try again!!");
+						 res.redirect("/users");
+						}
 					   else
 					     console.log(info);
 					});
@@ -138,6 +147,8 @@ app.get("/users/:id",function(req,res){
 	}).exec(function(err,foundUser){
 		if(err){
 			console.log(err);
+			req.flash("error","Something went wrong!! Please try again!!");
+			res.redirect("/users");
 		} else {
 			res.render("show.ejs",{user : foundUser})
 		}
@@ -148,6 +159,8 @@ app.get("/users/:id/task/new",function(req,res){
 	User.findById(req.params.id, function(err,foundUser){
 		if(err){
 			console.log(err);
+			req.flash("error","Something went wrong!! Please try again!!");
+			res.redirect("/users");
 		} else {
 			res.render("newTask.ejs",{user:foundUser});
 		}
@@ -159,11 +172,15 @@ app.post("/users/:id/task",function(req,res){
 	User.findById(req.params.id,function(err,user){
 		if(err){
 			console.log(err);
+			req.flash("error","Something went wrong!! Please try again!!");
+			res.redirect("/users");
 		} else {
 			var task={text:req.body.task.text, done:"false"};
 			Task.create(task,function(err,task){
 				if(err){
 					console.log(err);
+					req.flash("error","Something went wrong!! Please try again!!");
+					res.redirect("/users");
 				} else {
 					console.log(task);
 					// task.done="false";
@@ -175,8 +192,11 @@ app.post("/users/:id/task",function(req,res){
 					};
 
 					transporter.sendMail(mailOptions, function (err, info) {
-					    if(err)
-					    	console.log(err)
+					    if(err){
+					    	console.log(err);
+						    req.flash("error","Something went wrong!! Please try again!!");
+							res.redirect("/users");
+						}
 					    else
 					        console.log(info);
 					});
@@ -194,6 +214,8 @@ app.get("/users/:id/edit",function(req,res){
 	User.findById(req.params.id,function(err,foundUser){
 		if(err){
 			console.log(err);
+			req.flash("error","Something went wrong!! Please try again!!");
+			res.redirect("/users");
 		} else {
 			res.render("editUser.ejs",{user:foundUser});
 		}
@@ -205,6 +227,8 @@ app.put("/users/:id",function(req,res){
 	User.findByIdAndUpdate(req.params.id,req.body.user,function(err,foundUser){
 		if(err){
 			console.log(err);
+			req.flash("error","Something went wrong!! Please try again!!");
+			res.redirect("/users");
 		} else {
 			const mailOptions = {
 			  from: 'its me', // sender address
@@ -214,7 +238,9 @@ app.put("/users/:id",function(req,res){
 			};
 			transporter.sendMail(mailOptions, function (err, info) {
 			    if(err){
-			    	console.log(err)
+			    	console.log(err);
+			    	req.flash("error","Something went wrong!! Please try again!!");
+					res.redirect("/users");
 			    } else{
 			    	console.log(info);
 			    }
@@ -229,6 +255,8 @@ app.get("/users/:id/delete",function(req,res){
 	User.findById(req.params.id,function(err,foundUser){
 		if(err){
 			console.log(err);
+			req.flash("error","Something went wrong!! Please try again!!");
+			res.redirect("/users");
 		} else {
 			res.render("deleteUser.ejs",{user:foundUser});
 		}
@@ -240,6 +268,8 @@ app.delete("/users/:id",function(req,res){
 		User.findByIdAndRemove(req.params.id,function(err){
 			if(err){
 				console.log(err);
+				req.flash("error","Something went wrong!! Please try again!!");
+				res.redirect("/users");
 			} else {
 				req.flash("error","User Deleted!");
 				res.redirect("/users");
@@ -256,6 +286,8 @@ app.get("/users/:id/task/:task_id/edit",function(req,res){
 	Task.findById(req.params.task_id,function(err,foundTask){
 		if(err){
 			console.log(err);
+			req.flash("error","Something went wrong!! Please try again!!");
+			res.redirect("/users");
 		} else {
 			res.render("editTask.ejs",{user_id:req.params.id, task:foundTask});
 		}
@@ -270,6 +302,8 @@ app.put("/users/:id/task/:task_id",function(req,res){
 	Task.findByIdAndUpdate(req.params.task_id,req.body.task,function(err,foundTask){
 		if(err){
 			console.log(err);
+			req.flash("error","Something went wrong!! Please try again!!");
+			res.redirect("/users");
 		} else {
 			User.findById(req.params.id,function(err,user){
 				const mailOptions = {
@@ -281,8 +315,11 @@ app.put("/users/:id/task/:task_id",function(req,res){
 				  	 '<hr><hr><h4>Updated Task - </h4>' + req.body.task.text				
 				};
 				transporter.sendMail(mailOptions, function (err, info) {
-			   		if(err)
-			     		console.log(err)
+			   		if(err){
+			     		console.log(err);
+			     		req.flash("error","Something went wrong!! Please try again!!");
+						res.redirect("/users");
+			   		}
 			   		else
 				    	console.log(info);
 				});
@@ -297,6 +334,8 @@ app.delete("/users/:id/task/:task_id",function(req,res){
 	Task.findByIdAndRemove(req.params.task_id,function(err){
 		if(err){
 			console.log(err);
+			req.flash("error","Something went wrong!! Please try again!!");
+			res.redirect("/users");
 		} else {
 			req.flash("error","Task Deletd!");
 			res.redirect("/users/" + req.params.id);	
@@ -314,6 +353,8 @@ app.get("/users/:id/:task_id/done",function(req,res){
 	User.find({},function(err,foundUser){
 		if(err){
 			console.log(err);
+			req.flash("error","Something went wrong!! Please try again!!");
+			res.redirect("/users");
 		} else {
 			res.render("done.ejs",{user:foundUser, text:text, task_id:task_id, user_id:req.params.id});
 		}
@@ -332,6 +373,8 @@ app.post("/users/:user_id/:id/:task_id",function(req,res){
 	User.findById(req.params.user_id,function(err,foundUser){
 		if(err){
 			console.log(err);
+			req.flash("error","Something went wrong!! Please try again!!");
+			res.redirect("/users");
 		} else {
 			name = foundUser.name;
 		}
@@ -339,6 +382,8 @@ app.post("/users/:user_id/:id/:task_id",function(req,res){
 	Task.findById(req.params.task_id,function(err,task){
 		if(err){
 			console.log(err);
+			req.flash("error","Something went wrong!! Please try again!!");
+			res.redirect("/users");
 		} else {
 			// task.text = "aaj me kar ke aaya";
 			text = task.text;
@@ -349,6 +394,8 @@ app.post("/users/:user_id/:id/:task_id",function(req,res){
 	Task.findByIdAndUpdate(req.params.task_id,{done:"true"},function(err,task){
 		if(err){
 			console.log(err);
+			req.flash("error","Something went wrong!! Please try again!!");
+			res.redirect("/users");
 		} else {
 			console.log(task);
 		}
@@ -356,12 +403,16 @@ app.post("/users/:user_id/:id/:task_id",function(req,res){
 	User.findById(req.params.id,function(err,user){
 		if(err){
 			coneole.log(err);
+			req.flash("error","Something went wrong!! Please try again!!");
+			res.redirect("/users");
 		} else {
 			var newTask = {text:text, name:name, done:"false"};
 			Task.create(newTask,function(err,task){
 				console.log(task);
 				if(err){
 					console.log(err);
+					req.flash("error","Something went wrong!! Please try again!!");
+					res.redirect("/users");
 				} else {
 					const mailOptions = {
 						from: 'its me', // sender address
@@ -371,8 +422,11 @@ app.post("/users/:user_id/:id/:task_id",function(req,res){
 					};
 
 					transporter.sendMail(mailOptions, function (err, info) {
-					    if(err)
-					    	console.log(err)
+					    if(err){
+					    	console.log(err);
+					    	req.flash("error","Something went wrong!! Please try again!!");
+							res.redirect("/users");
+					    }
 					    else
 					        console.log(info);
 					});
@@ -390,6 +444,8 @@ app.get("/users/:id/:task_id/skip",function(req,res){
 	Task.findByIdAndUpdate(req.params.task_id,{done:"true"},function(err,task){
 		if(err){
 			console.log(err);
+			req.flash("error","Something went wrong!! Please try again!!");
+			res.redirect("/users");
 		} else {
 			console.log(task);
 			res.redirect("/users/" + req.params.id);
