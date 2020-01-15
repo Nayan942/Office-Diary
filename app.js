@@ -129,7 +129,13 @@ app.get("/users/new",function(req,res){
 });
 
 app.get("/users/:id",function(req,res){
-	User.findById(req.params.id).populate("tasks").exec(function(err,foundUser){
+	User.findById(req.params.id).populate({
+	 	path: 'tasks',
+	 	model: 'Task',
+	 	options: {
+	    	sort: {'_id': -1}
+		}
+	}).exec(function(err,foundUser){
 		if(err){
 			console.log(err);
 		} else {
