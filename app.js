@@ -81,6 +81,10 @@ var userSchema = new mongoose.Schema({
 
 var User = mongoose.model("User", userSchema);
 
+app.get("/",function(req,res){
+	res.redirect("/users");
+})
+
 app.get("/users",function(req,res){
 	User.find({}, function(err,allUser){
 		if(err){
@@ -456,11 +460,11 @@ app.get("/users/:id/:task_id/skip",function(req,res){
 	})
 })
 
-// app.listen(3000, function(){
-// 	console.log("server is running.............................");
-// })
-
-
-app.listen(process.env.PORT, process.env.IP, function(){
+app.listen(3000, function(){
 	console.log("server is running.............................");
 })
+
+
+// app.listen(process.env.PORT, process.env.IP, function(){
+// 	console.log("server is running.............................");
+// })
