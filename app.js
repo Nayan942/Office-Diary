@@ -52,6 +52,8 @@ app.use(function(req,res,next){
 })
 
 // mongoose.connect("mongodb://localhost:27017/node-demo"); 
+// mongoose.connect("mongodb://localhost:27017/node-demo"); 
+
 mongoose.connect(process.env.databaseURL);
 // mongoose.connect("mongodb+srv://Nayan:Nayan@officediary-fms6s.mongodb.net/test?retryWrites=true&w=majority"); 
 
