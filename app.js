@@ -54,7 +54,7 @@ app.use(function(req,res,next){
 // mongoose.connect("mongodb://localhost:27017/node-demo"); 
 // mongoose.connect("mongodb://localhost:27017/node-demo"); 
 
-mongoose.connect(process.env.databaseURL,{useNewUrlParser:true});
+mongoose.connect(process.env.databaseURL,{useNewUrlParser:true,useUnifiedTopology: true });
 // mongoose.connect("mongodb+srv://Nayan:Nayan@officediary-fms6s.mongodb.net/test?retryWrites=true&w=majority"); 
 // mongoose.connect("mongodb+srv://hardik:hardik13198@cluster0-b5anu.mongodb.net/yelpcamp?retryWrites=true&w=majority",{
 //     useNewUrlParser: true
@@ -463,6 +463,12 @@ app.get("/users/:id/:task_id/skip",function(req,res){
 			res.redirect("/users/" + req.params.id);
 		}
 	})
+})
+
+
+app.get("*",function(req,res){
+	req.flash("error","Doesn't exists!");
+	res.redirect("/users");
 })
 
 var port = process.env.PORT || 3000;
