@@ -56,6 +56,9 @@ app.use(function(req,res,next){
 
 mongoose.connect(process.env.databaseURL,{useNewUrlParser:true});
 // mongoose.connect("mongodb+srv://Nayan:Nayan@officediary-fms6s.mongodb.net/test?retryWrites=true&w=majority"); 
+// mongoose.connect("mongodb+srv://hardik:hardik13198@cluster0-b5anu.mongodb.net/yelpcamp?retryWrites=true&w=majority",{
+//     useNewUrlParser: true
+// });
 
 
 var taskSchema = new mongoose.Schema({ 
