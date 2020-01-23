@@ -18,7 +18,7 @@ var transporter = nodemailer.createTransport({
         pass: process.env.password
     }
 })
-//hello world
+
 // const mailOptions = {
 //   from: 'its me', // sender address
 //   to: '201701032@daiict.ac.in', // list of receivers
