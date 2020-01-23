@@ -467,7 +467,7 @@ app.get("/users/:id/:task_id/skip",function(req,res){
 
 
 app.get("*",function(req,res){
-	req.flash("error","Doesn't exists!");
+	// req.flash("error","Doesn't exists!");
 	res.redirect("/users");
 })
 
